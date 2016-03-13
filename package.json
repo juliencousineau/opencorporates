@@ -47,6 +47,8 @@
   "dependencies": {
     "camelify-recursive": "^1.0.0",
     "change-case": "^2.3.0",
+    "http": "0.0.0",
+    "query-string": "^3.0.1",
     "superagent": "^1.2.0"
   },
   "description": "The OpenCorporates API.",
