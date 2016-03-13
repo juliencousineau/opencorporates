@@ -1,0 +1,78 @@
+{
+  "_args": [
+    [
+      "https://github.com/juliencousineau/opencorporates.git",
+      "/Users/JulienCousineau/Documents/Appolo/appolo-web/crawler"
+    ]
+  ],
+  "_from": "git+https://github.com/juliencousineau/opencorporates.git",
+  "_id": "opencorporates@2.2.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/opencorporates",
+  "_phantomChildren": {},
+  "_requested": {
+    "hosted": {
+      "directUrl": "https://raw.githubusercontent.com/juliencousineau/opencorporates/master/package.json",
+      "gitUrl": "git://github.com/juliencousineau/opencorporates.git",
+      "httpsUrl": "git+https://github.com/juliencousineau/opencorporates.git",
+      "shortcut": "github:juliencousineau/opencorporates",
+      "ssh": "git@github.com:juliencousineau/opencorporates.git",
+      "sshUrl": "git+ssh://git@github.com/juliencousineau/opencorporates.git",
+      "type": "github"
+    },
+    "name": null,
+    "raw": "https://github.com/juliencousineau/opencorporates.git",
+    "rawSpec": "https://github.com/juliencousineau/opencorporates.git",
+    "scope": null,
+    "spec": "git+https://github.com/juliencousineau/opencorporates.git",
+    "type": "hosted"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+https://github.com/juliencousineau/opencorporates.git#eb5e34f910b7f4487b1cb22b9b33309d04c57f09",
+  "_shasum": "e43580b89eaabeb4f61ea4bf993423cb96035b55",
+  "_shrinkwrap": null,
+  "_spec": "https://github.com/juliencousineau/opencorporates.git",
+  "_where": "/Users/JulienCousineau/Documents/Appolo/appolo-web/crawler",
+  "author": {
+    "email": "mike.maccana@gmail.com",
+    "name": "Mike MacCama",
+    "url": "http://mikemaccana.com"
+  },
+  "bugs": {
+    "url": "https://github.com/mikemaccana/opencorporates/issues"
+  },
+  "dependencies": {
+    "camelify-recursive": "^1.0.0",
+    "change-case": "^2.3.0",
+    "superagent": "^1.2.0"
+  },
+  "description": "The OpenCorporates API.",
+  "devDependencies": {},
+  "engines": {
+    "node": "*"
+  },
+  "gitHead": "eb5e34f910b7f4487b1cb22b9b33309d04c57f09",
+  "homepage": "https://github.com/mikemaccana/opencorporates#readme",
+  "keywords": [
+    "companies",
+    "gov",
+    "government",
+    "opencorporates"
+  ],
+  "license": {
+    "type": "MIT"
+  },
+  "main": "index.js",
+  "name": "opencorporates",
+  "optionalDependencies": {},
+  "readme": "# opencorporates\n\nThe [OpenCorporates](http://opencorporates.com) API.\n\n## Features\n\nThis module includes all the normal features of the [OpenCorporates REST API](http://api.opencorporates.com/documentation/REST-API-introduction) and adds the following:\n\n - camelCase results, so you can use the keys in your own JavaScript without having to convert thems\n - Results and metadata are returned seperately\n - Clean arrays, eg, OpenCorporates would normally return `items = [{'item': {actual item object}}, {'item': {actual item object}}` whereas this module will return `items = [{actual item object}, {actual item object}]`. So `items.forEach(function(item){})` works properly.\n\nIf you're unsure of how anything works, check the unit tests, which have examples of all the API calls.\n\n## Changelog\n\n### Version 2.2 changes\n\n - Default OpenCorporates API version is now 4.0\n\n### Version 2 changes\n\nIf you're upgrading from version 1, the new module has the following changes:\n\n - The module now exports a single function which takes the apiKey as an argument.\n - Results, and all function parameters are now in camelCase.\n\n## Installation\n\nStable: `npm install opencorporates`\n\nHead: `npm install fvdm/nodejs-opencorporates`\n\n## Usage\n\n```js\nvar openCorporates = require('opencorporates')('YOUR_API_TOKEN')\n```\n\nIf you do not have an API key, you may omit it, but will have a lower rate limit:\n\n```js\nvar openCorporates = require('opencorporates')()\n```\n\nAPI results are converted to camelCase so you can use the keys directly in your app.\n\n## openCorporates.companies\n\n### openCorporates.companies.get(jurisdictionCode, companyID, cb)\n\nGet a single company. Example:\n\n```js\nopenCorporates.companies.get('us_ca', 'C3268102', function(err, res){\n\tconsole.log(JSON.stringify(res, null, 2))\n})\n```\n\n```js\n\t{\n\t\t\"name\": \"GOOGLE INC.\",\n\t\t\"inactive\": false,\n\t\t\"source\": {\n\t\t\t\"publisher\": \"California Secretary of State\",\n\t\t\t\"url\": \"http://kepler.sos.ca.gov/\",\n\t\t\t\"retrievedAt\": \"2014-02-09T19:01:42+00:00\"\n\t\t},\n\t\t\"data\": {\n\t\t\t\"url\": \"https://opencorporates.com/companies/us_ca/C2474131/data\",\n\t\t\t\"mostRecent\": [\n\t\t\t\t{\n\t\t\t\t\t\"datum\": {\n\t\t\t\t\t\t\"id\": 2685290,\n\t\t\t\t\t\t\"title\": \"Approved US Government Supplier\",\n\t\t\t\t\t\t\"description\": null,\n\t\t\t\t\t\t\"dataType\": \"GovernmentApprovedSupplier\",\n\t\t\t\t\t\t\"opencorporatesUrl\": \"https://opencorporates.com/data/2685290\"\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"datum\": {\n\t\t\t\t\t\t\"id\": 4913217,\n\t\t\t\t\t\t\"title\": \"Company Address\",\n\t\t\t\t\t\t\"description\": \"1600 AMPHITHEATRE PKWY, MOUNTAIN VIEW, CA, 940431351\",\n\t\t\t\t\t\t\"dataType\": \"CompanyAddress\",\n\t\t\t\t\t\t\"opencorporatesUrl\": \"https://opencorporates.com/data/4913217\"\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t],\n\t\t\t\"totalCount\": 2\n\t\t},\n\t\t\"filings\": [],\n\t\t\"officers\": [],\n\t\t\"companyNumber\": \"C2474131\",\n\t\t\"jurisdictionCode\": \"us_ca\",\n\t\t\"incorporationDate\": \"2002-11-07\",\n\t\t\"dissolutionDate\": null,\n\t\t\"companyType\": \"Foreign Stock\",\n\t\t\"registryUrl\": \"https://businessfilings.sos.ca.gov/frmDetail.asp?CorpID=02474131\",\n\t\t\"branchStatus\": \"branch of an out-of-jurisdiction company\",\n\t\t\"currentStatus\": \"Active\",\n\t\t\"createdAt\": \"2011-09-21T22:27:02+00:00\",\n\t\t\"updatedAt\": \"2014-10-31T06:55:32+00:00\",\n\t\t\"retrievedAt\": \"2014-02-09T19:01:42+00:00\",\n\t\t\"opencorporatesUrl\": \"https://opencorporates.com/companies/us_ca/C2474131\",\n\t\t\"previousNames\": [],\n\t\t\"agentName\": \"CORPORATION SERVICE COMPANY WHICH WILL DO BUSINESS IN CALIFORNIA AS CSC - LAWYERS INCORPORATING SERVICE\",\n\t\t\"agentAddress\": \"2710 GATEWAY OAKS DR STE 150N, SACRAMENTO, CA 95833\",\n\t\t\"registeredAddressInFull\": \"1600 AMPHITHEATRE PARKWAY, MOUNTAIN VIEW, CA 94043\",\n\t\t\"registeredAddress\": {\n\t\t\t\"locality\": null,\n\t\t\t\"region\": null,\n\t\t\t\"country\": \"United States\",\n\t\t\t\"streetAddress\": \"1600 AMPHITHEATRE PARKWAY, MOUNTAIN VIEW, CA 94043\",\n\t\t\t\"postalCode\": null\n\t\t},\n\t\t\"corporateGroupings\": [],\n\t\t\"industryCodes\": [],\n\t\t\"financialSummary\": null,\n\t\t\"homeCompany\": null,\n\t\t\"controllingEntity\": {\n\t\t\t\"name\": \"GOOGLE INC.\",\n\t\t\t\"jurisdictionCode\": \"us_de\",\n\t\t\t\"companyNumber\": null,\n\t\t\t\"opencorporatesUrl\": \"https://opencorporates.com/placeholders/691721\"\n\t\t}\n\t}\n```\n\n### openCorporates.companies.search(searchTerm, [filters], cb)\n\nSearch a company.\n\n`filters` is optional, and can be:\n\n - `jurisdictionCode` e.g. `us_ca`, `nl` see the [full list of jurisdiction codes](https://opencorporates.com/companies/jurisdictions). Default is [none/worldwide]\n - `order` e.g. `score`. Default is alphabetic\n - `perPage` e.g. number of results, max. 100. Default is 30 results per page\n - `page` e.g. results page. Default is 1\n\n```js\nopenCorporates.companies.search( 'github', function(err, res){\n\tconsole.log(JSON.stringify(res, null, 2))\n})\n```\n\nThis will return:\n\n```js\n\t[\n\n\t\t{\n\t\t\t\"name\": \"GITHUB, INC.\",\n\t\t\t\"inactive\": false,\n\t\t\t\"source\": {\n\t\t\t\t\"publisher\": \"California Secretary of State\",\n\t\t\t\t\"url\": \"http://kepler.sos.ca.gov/\",\n\t\t\t\t\"retrievedAt\": \"2012-04-03T07:19:16+00:00\"\n\t\t\t},\n\t\t\t\"companyNumber\": \"C3268102\",\n\t\t\t\"jurisdictionCode\": \"us_ca\",\n\t\t\t\"incorporationDate\": \"2009-12-31\",\n\t\t\t\"dissolutionDate\": null,\n\t\t\t\"companyType\": \"Domestic Stock\",\n\t\t\t\"registryUrl\": \"https://businessfilings.sos.ca.gov/frmDetail.asp?CorpID=03268102\",\n\t\t\t\"branchStatus\": null,\n\t\t\t\"currentStatus\": \"Active\",\n\t\t\t\"createdAt\": \"2011-09-17T15:33:31+00:00\",\n\t\t\t\"updatedAt\": \"2013-10-27T06:27:24+00:00\",\n\t\t\t\"retrievedAt\": \"2012-04-03T07:19:16+00:00\",\n\t\t\t\"opencorporatesUrl\": \"https://opencorporates.com/companies/us_ca/C3268102\",\n\t\t\t\"previousNames\": [],\n\t\t\t\"registeredAddressInFull\": \"548 4TH STREET, SAN FRANCISCO, CA 94107\"\n\t\t},\n\t  ...many more companies omitted....\n\t]\n}\n```\n\n### openCorporates.companies.filings(jurisdiction, id, [filters], callback)\n\nGet available filings for a company.\n\n`filters` is optional, and can be:\n\n - `perPage` e.g. number of results, max. 100. Default is 30 results per page\n - `page` e.g. results page. Default is 1\n\n```js\nopenCorporates.companies.filings( 'C3268102', console.log )\n```\n\n`filters` is optional, and can be:\n\n - `perPage` e.g. number of results, max. 100. Default is 30 results per page\n - `page` e.g. results page. Default is 1\n\n\n### openCorporates.companies.data(jurisdiction, id, [filters], callback)\n\nGet more available data for a company.\n\n`filters` is optional, and can be:\n\n - `perPage` e.g. number of results, max. 100. Default is 30 results per page\n - `page` e.g. results page. Default is 1\n\n```js\nopenCorporates.companies.filings( 'C3268102', console.log )\n```\n\n## openCorporates.officers\n\n### openCorporates.officers.get( id, callback)\n\nGet an officer by ID.\n\n```js\nopenCorporates.officers.get( '21200360', console.log )\n```\n\n\n### openCorporates.officers.search( query, [filters], callback )\n\nSearch officers.\n\n- `jurisdictionCode` e.g. `us_ca`, `nl`. Default is [none/worldwide]\n- `perPage` e.g. number of results, max. 100. Default is 30 results per page\n- `page` e.g. results page. Default is 1\n\n\n```js\nopenCorporates.officers.search( 'bart simpson', callback )\n```\n\n## openCorporates.corporateGroupings\n\nFrom [OpenCorporates Corporate Grouping description:](http://blog.opencorporates.com/2011/06/01/introducing-corporategroupings-where-fuzzy-concepts-meet-legal-entities/)\n\n\n> \"A CorporateGrouping is a user-curated collection of companies that belong to some human-understand concept of a corporation (which maps to the Wikipedia article about that corporation).\"\n\n\n### openCorporates.corporateGroupings.get ( name, callback )\n\nGet extended data about a corporate grouping, by its name.\n\n```js\nopenCorporates.corporateGroupings.get( 'bp', console.log )\n```\n\n\n### openCorporates.corporateGroupings.search ( query, [filters], callback )\n\n```js\nopenCorporates.corporateGroupings.search( 'bp', console.log )\n```\n\n- `perPage` e.g. number of results, max. 100. Default is 30 results per page\n- `page` e.g. results page. Default is 1\n\n## Credits\n\nThis module was forked from [Franklin van de Meent](http://frankl.in)'s original public domain OpenCorporates code.\n\nThe fork was created and is maintained by [Mike MacCana](http://mikemaccana.com)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mikemaccana/opencorporates.git"
+  },
+  "version": "2.2.1"
+}
